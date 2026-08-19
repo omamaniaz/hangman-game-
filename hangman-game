@@ -1,0 +1,40 @@
+import random
+
+words = ["apple", "house", "tiger", "water", "computer"]
+
+word = random.choice(words)
+
+guessed_word = "_" * len(word)
+wrong_guesses = 0
+
+print("Welcome to Hangman!")
+print("Guess the word one letter at a time.")
+
+while wrong_guesses < 6 and "_" in guessed_word:
+
+    print("\nWord:", guessed_word)
+    print("Wrong guesses:", wrong_guesses, "/ 6")
+
+    guess = input("Enter a letter: ").lower()
+
+    if guess in word:
+        new_word = ""
+
+        for i in range(len(word)):
+            if word[i] == guess:
+                new_word += guess
+            else:
+                new_word += guessed_word[i]
+
+        guessed_word = new_word
+        print("Correct guess!")
+
+    else:
+        wrong_guesses += 1
+        print("Wrong guess!")
+
+if "_" not in guessed_word:
+    print("\nCongratulations! You guessed the word:", word)
+else:
+    print("\nGame Over!")
+    print("The word was:", word)
